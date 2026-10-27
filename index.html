@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syafa Company - Konsultan Bisnis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-blue: #b4d4ff;
+            --pastel-pink: #ffc4d9;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Latar Belakang Gradasi & Polkadot */
+        body {
+            background-color: var(--pastel-blue);
+            background-image: 
+                radial-gradient(rgba(255,255,255,0.4) 15%, transparent 16%),
+                radial-gradient(rgba(255,255,255,0.4) 15%, transparent 16%),
+                linear-gradient(135deg, var(--pastel-blue) 0%, var(--pastel-pink) 100%);
+            background-size: 40px 40px, 40px 40px, 100% 100%;
+            background-position: 0 0, 20px 20px, 0 0;
+            background-attachment: fixed;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Efek Kaca (Glassmorphism) */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #2d3436;
+        }
+
+        /* Animasi Mengambang (Floating) */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes float-reverse {
+            0% { transform: translateY(-15px); }
+            50% { transform: translateY(0px); }
+            100% { transform: translateY(-15px); }
+        }
+
+        /* Navigasi */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 700; color: #333; }
+        
+        /* Hero Section (Terbelah 2) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 20px 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-image {
+            flex: 1;
+            animation: float-reverse 6s ease-in-out infinite;
+        }
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 5px solid rgba(255,255,255,0.7);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #4a4a4a;
+        }
+        .badge {
+            background: rgba(255,255,255,0.8);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+            color: var(--pastel-pink);
+            border: 1px solid var(--pastel-pink);
+        }
+
+        /* Layout Grid Baru untuk Strategi */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .strategy-card {
+            background: rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 25px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .strategy-card:hover {
+            background: rgba(255,255,255,0.7);
+            transform: translateY(-5px);
+        }
+        .strategy-card h4 {
+            font-size: 18px;
+            color: #2d3436;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .strategy-card p {
+            font-size: 14px;
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+
+        /* Strategi & Layanan Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .card h3 { margin-bottom: 15px; }
+        .card p { color: var(--text-light); font-size: 14px; line-height: 1.6; }
+
+        /* Testimoni */
+        .stars { color: #f1c40f; margin-bottom: 10px; font-size: 20px; }
+        .testi-card {
+            padding: 30px;
+            transition: 0.3s;
+        }
+        .testi-card:hover { transform: scale(1.05); }
+        .testi-text { font-style: italic; margin-bottom: 20px; font-size: 14px; }
+        .client-name { font-weight: 600; }
+
+        /* Kontak & Form */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+        .contact-info p { margin-bottom: 15px; font-size: 15px;}
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.5);
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            background: rgba(255,255,255,0.9);
+            border-color: var(--pastel-pink);
+        }
+        .form-group textarea { height: 120px; resize: vertical; }
+        
+        .btn {
+            background: #fff;
+            color: #d67b93;
+            border: 2px solid #fff;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .btn:hover { background: #d67b93; color: #fff; border-color: #d67b93; }
+
+        /* Animasi Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Notifikasi Form */
+        #form-success {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @media(max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .contact-wrap { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass">
+        <div class="logo">Syafa Company.</div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <div class="badge">🚀 12+ Tahun Pengalaman Terpercaya</div>
+            <h1>Elevasi Bisnis Anda ke Level Selanjutnya</h1>
+            <p>Pendekatan strategi bisnis berbasis data dengan sentuhan kreativitas. Kami membantu perusahaan Anda tumbuh, beradaptasi, dan mendominasi pasar.</p>
+        </div>
+        <div class="hero-image glass">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Foto Kantor Syafa Company">
+        </div>
+    </section>
+
+    <!-- BAGIAN STRATEGI BISNIS YANG DIPERPANJANG -->
+    <section class="container reveal">
+        <h2>Strategi Bisnis Kami</h2>
+        <div class="glass" style="padding: 40px; text-align: center; margin-bottom: 40px;">
+            <p style="font-size: 16px; line-height: 1.8; color: #4a4a4a;">
+                Di <strong>Syafa Company</strong>, kami menyadari bahwa setiap bisnis memiliki keunikan dan tantangannya masing-masing. Kami tidak menggunakan solusi *copy-paste* atau cara lama yang usang. Pendekatan kami dirancang secara khusus *(tailor-made)* dengan mengombinasikan kreativitas dan ketajaman data. Kami menerapkan <strong>4 Pilar Strategi Utama</strong> untuk memastikan bisnis Anda tidak hanya bertahan, tetapi memimpin di industrinya:
+            </p>
+
+            <div class="grid-2">
+                <div class="strategy-card">
+                    <h4>📊 1. Analisis & Pemetaan Pasar</h4>
+                    <p>Sebelum mengambil langkah, kami melakukan audit menyeluruh terhadap bisnis Anda. Kami menganalisis tren pasar terkini, perilaku konsumen target, dan celah kelemahan kompetitor. Data ini menjadi kompas kami untuk menentukan arah yang paling menguntungkan.</p>
+                </div>
+                <div class="strategy-card">
+                    <h4>💡 2. Inovasi Model Bisnis</h4>
+                    <p>Dunia berubah cepat. Kami membantu Anda merestrukturisasi model bisnis agar lebih relevan dengan era digital. Mulai dari merancang aliran pendapatan *(revenue stream)* baru hingga mengadopsi teknologi yang membuat produk Anda sulit ditiru.</p>
+                </div>
+                <div class="strategy-card">
+                    <h4>⚙️ 3. Efisiensi & Otomatisasi Sistem</h4>
+                    <p>Pertumbuhan yang cepat harus diimbangi dengan pondasi internal yang kuat. Kami menyusun Standar Operasional Prosedur (SOP) yang ringkas, memangkas biaya yang tidak perlu, dan mengintegrasikan *tools* otomatisasi agar tim Anda bekerja lebih cerdas, bukan lebih keras.</p>
+                </div>
+                <div class="strategy-card">
+                    <h4>🚀 4. Skalabilitas & Ekspansi</h4>
+                    <p>Setelah sistem internal stabil, kami mengeksekusi strategi *scale-up*. Baik itu membuka cabang baru, meluncurkan lini produk anyar, atau merambah pasar internasional, kami mendampingi setiap fase agar meminimalisir risiko kegagalan.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>Layanan Unggulan</h2>
+        <div class="grid-3">
+            <div class="card glass">
+                <div class="card-icon">📈</div>
+                <h3>Scale-Up Bisnis</h3>
+                <p>Membantu UMKM dan perusahaan menengah memperluas jangkauan pasar dan melipatgandakan omzet secara terukur.</p>
+            </div>
+            <div class="card glass">
+                <div class="card-icon">🎨</div>
+                <h3>Rebranding & Kreatif</h3>
+                <p>Menyegarkan identitas visual dan strategi komunikasi agar brand Anda lebih dilirik dan diingat audiens modern.</p>
+            </div>
+            <div class="card glass">
+                <div class="card-icon">💻</div>
+                <h3>Digitalisasi Sistem</h3>
+                <p>Mengintegrasikan bisnis Anda dengan teknologi terkini untuk mempermudah pemantauan dan pengelolaan operasional.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal">
+        <h2>Ulasan Klien Syafa Company</h2>
+        <div class="grid-3">
+            <div class="testi-card glass">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">"Sangat puas! Strategi dari tim Syafa Company bikin penjualan produk kami naik 300% dalam waktu 3 bulan. Pelayanannya ramah banget dan solutif."</p>
+                <p class="client-name">- Rina Sari, Founder Skincare</p>
+            </div>
+            <div class="testi-card glass">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">"Solusi yang diberikan sangat *out of the box*. Mereka paham betul cara menjangkau target pasar Gen Z dengan efektif tanpa buang budget iklan sia-sia."</p>
+                <p class="client-name">- Dimas Aditya, CEO TechStart</p>
+            </div>
+            <div class="testi-card glass">
+                <div class="stars">★★★★☆</div>
+                <p class="testi-text">"Konsultan bisnis paling asik diajak diskusi. Pendekatannya modern, data-driven, dan implementasi operasionalnya mudah dipahami tim kami."</p>
+                <p class="client-name">- Nabila, Pemilik Kedai Kopi</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal">
+        <h2>Mari Berkolaborasi</h2>
+        <div class="contact-wrap glass">
+            <div class="contact-info">
+                <h3 style="margin-bottom: 20px;">Informasi Kontak</h3>
+                <p>📍 <strong>Alamat:</strong> Jl. Inovasi No. 88, Kawasan Bisnis, Jakarta</p>
+                <p>📞 <strong>Telepon:</strong> 089522663294</p>
+                <p>✉️ <strong>Email:</strong> bodal@kebakaran.123.id</p>
+                <p>🕒 <strong>Jam Layanan:</strong> Senin - Jumat (09.00 - 16.00 WIB)</p>
+                
+                <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.6); border-radius: 12px;">
+                    <p style="font-size: 13px; margin: 0;"><em>"Kami siap membalas pesan Anda maksimal 1x24 jam di hari kerja. Mari wujudkan visi bisnis Anda bersama Syafa Company."</em></p>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="bisnisForm">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat Email</label>
+                        <input type="email" placeholder="contoh@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No. Telepon / WhatsApp</label>
+                        <input type="tel" placeholder="089xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan / Kebutuhan Bisnis Anda</label>
+                        <textarea placeholder="Ceritakan kendala, target, atau layanan apa yang ingin didiskusikan..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Kirim Permintaan</button>
+                    <div id="form-success">✅ Pesan berhasil dikirim ke bodal@kebakaran.123.id! Kami akan segera menghubungi Anda.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animasi Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // Form Submit
+        document.getElementById('bisnisForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('form-success').style.display = 'block';
+            this.reset();
+            setTimeout(() => {
+                document.getElementById('form-success').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
